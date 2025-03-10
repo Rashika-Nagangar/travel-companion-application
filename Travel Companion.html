@@ -139,6 +139,7 @@ html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
+  appearance: button;
   cursor: pointer;
 }
 button[disabled],
@@ -164,6 +165,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="search"] {
   -webkit-appearance: textfield;
+  appearance: textfield;
   box-sizing: content-box;
 }
 input[type="search"]::-webkit-search-cancel-button,
@@ -2598,6 +2600,7 @@ textarea.form-control {
 }
 input[type="search"] {
   -webkit-appearance: none;
+  appearance: none;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,
@@ -5846,6 +5849,7 @@ button.close {
   background: transparent;
   border: 0;
   -webkit-appearance: none;
+  appearance: none;
 }
 .modal-open {
   overflow: hidden;
@@ -9648,9 +9652,6 @@ div.unrecognized_cell .inner_cell a:hover {
     display: none;
   }
 }
-div.code_cell {
-  /* avoid page breaking on code cells when printing */
-}
 @media print {
   div.code_cell {
     page-break-inside: avoid;
@@ -10094,9 +10095,6 @@ div.output_javascript:empty {
 div.raw_input_container {
   line-height: 1.21429em;
   padding-top: 5px;
-}
-pre.raw_input_prompt {
-  /* nothing needed here. */
 }
 input.raw_input {
   font-family: monospace;
@@ -10722,7 +10720,6 @@ ul#help_menu li a i {
   -moz-osx-font-smoothing: grayscale;
   display: block;
   content: "\f0da";
-  float: right;
   color: #333333;
   margin-top: 2px;
   margin-right: -10px;
@@ -11384,6 +11381,14 @@ li.pulse.open > a.dropdown-toggle {
  * have some strange css to have the scroll bar on
  * the left with fix button on the top right of the tooltip
  */
+ @keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 @-moz-keyframes fadeOut {
   from {
     opacity: 1;
@@ -11398,6 +11403,14 @@ li.pulse.open > a.dropdown-toggle {
   }
   to {
     opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 @-moz-keyframes fadeIn {
@@ -11504,6 +11517,7 @@ li.pulse.open > a.dropdown-toggle {
   width: 25px;
   height: 25px;
   -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
