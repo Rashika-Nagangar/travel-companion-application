@@ -11,12 +11,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
-print "Opening Trip Advisor"
+print ("Opening Trip Advisor")
 
 driver = webdriver.Firefox(executable_path=r'C:\Program Files\geckodriver.exe')
 
-location = raw_input("Enter the destination Location ")
-current  = raw_input("Enter current location ")
+location = input("Enter the destination Location ")
+current  = input("Enter current location ")
 #start_date = raw_input("Start Date")
 #end_date = raw_input("End Date")
 
@@ -33,7 +33,7 @@ driver.find_element_by_xpath("//button[@tabindex='5']").click()
 
 time.sleep(3)
 
-print "Extracting Hotels Data"
+print ("Extracting Hotels Data")
 
 src = driver.page_source
 
@@ -68,20 +68,20 @@ for j in range(1,size):
         else:
             hotel_price.append("Not Available")
     
-    print len(hotel_names)," ",len(hotel_links)," ",len(hotel_price)    
+    print (len(hotel_names)," ",len(hotel_links)," ",len(hotel_price))    
             
     driver.find_element_by_xpath("//a[@data-page-number='"+str(j+1)+"']").click();
     WebDriverWait(driver, 1000).until(EC.visibility_of_element_located((By.XPATH, "//span[@data-page-number='"+str(j+1)+"']")))
     src = driver.page_source
     soup = BeautifulSoup(src, "lxml")
-    print j
+    print (j)
     
 time.sleep(3)
 
 driver.find_element_by_xpath("//a[@id='global-nav-restaurants']").click();
 time.sleep(3)
 driver.find_element_by_xpath("//a[@id='global-nav-restaurants']").click();
-print "Extracting Restaurants Data"
+print ("Extracting Restaurants Data")
 time.sleep(3)
 
 src = driver.page_source
@@ -109,11 +109,11 @@ for j in range(1,size):
     WebDriverWait(driver, 1000).until(EC.visibility_of_element_located((By.XPATH, "//span[@data-page-number='"+str(j+1)+"']")))
     src = driver.page_source
     soup = BeautifulSoup(src, "lxml")
-    print j
+    print (j)
 
 complete_hotel_data = []
 
-print "Extracting Particular Hotel Data"
+print ("Extracting Particular Hotel Data")
 time.sleep(3)
 
 for l in hotel_links:
@@ -123,7 +123,7 @@ for l in hotel_links:
     soup = BeautifulSoup(src, "lxml")
     
     name = soup.find("h1",{"id":"HEADING"})
-    print name.text
+    print (name.text)
     
     locality = soup.find_all("span",{"class":"locality"})[0].text
     if(len(soup.find_all("span",{"class":"extended-address"})) > 0):
@@ -184,7 +184,7 @@ for l in hotel_links:
         time.sleep(1)
         WebDriverWait(driver, 1000).until(EC.visibility_of_element_located((By.XPATH, "//span[@class='nav next taLnk ']")))    
         driver.find_element_by_xpath("//span[@class='nav next taLnk ']").click()
-        print i
+        print (i)
         
         
     particular_hotel_data = [name,locality,extended_address,rank,outoff,rating,excellent,very_good,average,poor,terrible,reviews,reviews_head,price]
@@ -194,7 +194,7 @@ for l in hotel_links:
     
 complete_restaurants_data = []
 
-print "Extracting Particular Restaurants Data"
+print ("Extracting Particular Restaurants Data")
 time.sleep(3)
 
 for l in restaurants_links:
@@ -203,7 +203,7 @@ for l in restaurants_links:
     soup = BeautifulSoup(src, "lxml")
     
     name = soup.find("h1",{"id":"HEADING"})
-    print name.text
+    print (name.text)
     
     locality = soup.find_all("span",{"class":"locality"})[0].text
     
@@ -268,7 +268,7 @@ for l in restaurants_links:
         time.sleep(1)
         WebDriverWait(driver, 1000).until(EC.visibility_of_element_located((By.XPATH, "//span[@class='nav next taLnk ']")))    
         driver.find_element_by_xpath("//span[@class='nav next taLnk ']").click()
-        print i
+        print (i)
         
     src = driver.page_source
     soup = BeautifulSoup(src, "lxml")
@@ -345,7 +345,7 @@ from textblob import TextBlob
 import glob
 
 for i in glob.glob("hotels_reviews/*.csv"):
-    print i
+    print (i)
     with open(i,"r") as sample:
         csv_reader = csv.reader(sample)
         sentiment = 0
@@ -368,7 +368,7 @@ for i in glob.glob("hotels_reviews/*.csv"):
         csv_writer.writerow(t)
         
 for i in glob.glob("restaurants_reviews/*.csv"):
-    print i
+    print (i)
     with open(i,"r") as sample:
         csv_reader = csv.reader(sample)
         sentiment = 0
@@ -391,7 +391,7 @@ for i in glob.glob("restaurants_reviews/*.csv"):
         csv_writer.writerow(t)
         
 for i in glob.glob("hotels_reviews_head/*.csv"):
-    print i
+    print (i)
     with open(i,"r") as sample:
         csv_reader = csv.reader(sample)
         sentiment = 0
@@ -414,7 +414,7 @@ for i in glob.glob("hotels_reviews_head/*.csv"):
         csv_writer.writerow(t)
         
 for i in glob.glob("restaurants_reviews_head/*.csv"):
-    print i
+    print (i)
     with open(i,"r") as sample:
         csv_reader = csv.reader(sample)
         sentiment = 0
@@ -519,10 +519,10 @@ for i in prices:
     airplanes_prices.append(i.text[2:])
     
 for i in range(0,len(airlines)):
-    print airlines_name[i]
-    print airports[i]
-    print airplanes_prices[i]
-    print "\n"
+    print (airlines_name[i])
+    print (airports[i])
+    print (airplanes_prices[i])
+    print ("\n")
 
 import glob
 
